@@ -1,14 +1,11 @@
 const { openBrowser, goto, into, write, inputField, focus, click, $, press, comboBox, closeBrowser } = require('taiko');
 const config = require('config');
-const url = config.get('Site.url');
-const user = config.get('User.username');
-const password = config.get('User.password');
 (async () => {
     try {
         await openBrowser();
-        await goto(url);
-        await write(user, into(inputField({'name':'email'})));
-        await write(password, into(inputField({'name':'password'})));
+        await goto(config.get('Site.url'));
+        await write(config.get('User.username'), into(inputField({'name':'email'})));
+        await write(config.get('User.password'), into(inputField({'name':'password'})));
         await click(button({type:'submit'}));
         await click('Log');
         await click('Activities');
@@ -22,7 +19,7 @@ const password = config.get('User.password');
         await press('Tab');
         await press('ArrowDown');
         await press('ArrowDown');
-        await write('7000', into(inputField({name: 'distance'})));
+        await write(config.get('Data.steps'), into(inputField({name: 'distance'})));
         await click($('.log-actions button[type=submit]'));
     } catch (e) {
         console.error(e);
