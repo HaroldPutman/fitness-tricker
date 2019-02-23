@@ -22,4 +22,4 @@ Set the number of steps, or provide a range to get a random value
 within that range (ex. `7000-8000`).
 
 ### Data.time
-Not implemented. Always 7:30 AM for now.
+Not implemented. Always 6:15 AM for now.
