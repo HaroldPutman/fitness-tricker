@@ -7,8 +7,8 @@
     "password": "password"
   },
   "Data": {
-    "steps": "7000",
-    "time": "7:30 AM",
-    "duration": "1:00:00"
+    "steps": "700-800",
+    "stepsPerMinute": 100,
+    "time": "7:30 AM"
   }
 }
