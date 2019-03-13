@@ -12,6 +12,11 @@ npm start
 ```
 Repeat daily.
 
+## Preparation
+
+You can set up an account on that "two-rhyming-syllable" fitness
+tracker site without owning a an actual device. Do that first.
+
 ## Configuration
 Copy [config/default.json](config/default.json) to `config/local.json`
 and change anything you want in there, starting with the
