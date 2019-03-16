@@ -11,7 +11,7 @@ const hh = Math.floor(duration / 60);
 const mm = Math.floor(duration % 60);
 const ss = Math.floor((duration - (hh * 60 + mm)) * 60);
 const timeRE = RegExp(/(\d+):(\d+)\s*([ap]m)?/,'i');
-const time = timeRE.exec(config.get('Data.time'));
+const time = timeRE.exec(config.get('Data.time').toLowerCase());
 (async () => {
     try {
         await openBrowser();
@@ -23,16 +23,13 @@ const time = timeRE.exec(config.get('Data.time'));
         await click($('button.walking'));
         await write(time[1], into(inputField({name: 'startTimeHours'})));
         await write(time[2], into(inputField({name: 'startTimeMinutes'})));
-        await click($('#ampm-c33-button'));
-        const ampmId = (time[3].toLowerCase()) === 'pm' ? '#ui-id-2' : '#ui-id-1';
-        await click($(ampmId));
+        await click(link({id: 'ampm-c33-button'}));
+        await click(link(time[3], toRightOf('Start time')));
         await write(`${hh}`, into(inputField({name: 'durationHours'})));
         await write(`${mm}`, into(inputField({name: 'durationMinutes'})));
         await write(`${ss}`, into(inputField({name: 'durationSeconds'})));
-        await focus(inputField({name: 'distance'}));
-        await press('Tab');
-        await press('ArrowDown');
-        await press('ArrowDown');
+        await click(link({id: 'distance-units-c33-button'}));
+        await click(link('steps', toRightOf('Distance')));
         await write(`${steps}`, into(inputField({name: 'distance'})));
         await click($('.log-actions button[type=submit]'));
     } catch (e) {
