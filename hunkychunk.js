@@ -1,23 +1,23 @@
 const { openBrowser, goto, into, write, inputField, focus, click, $, press, comboBox, closeBrowser } = require('taiko');
 const config = require('config');
-const stepRange = config.get('Data.steps').split('-').map(r => parseInt(r.trim()));
+const stepRange = config.get('Fitbit.steps').split('-').map(r => parseInt(r.trim()));
 var steps = stepRange[0];
 if (stepRange.length > 1) {
   steps = (Math.random() * Math.abs(stepRange[1] - stepRange[0])) + stepRange[0];
 }
 steps = Math.floor(steps);
-const duration = steps / config.get('Data.stepsPerMinute');
+const duration = steps / config.get('Fitbit.stepsPerMinute');
 const hh = Math.floor(duration / 60);
 const mm = Math.floor(duration % 60);
 const ss = Math.floor((duration - (hh * 60 + mm)) * 60);
 const timeRE = RegExp(/(\d+):(\d+)\s*([ap]m)?/,'i');
-const time = timeRE.exec(config.get('Data.time').toLowerCase());
+const time = timeRE.exec(config.get('Fitbit.time').toLowerCase());
 (async () => {
     try {
         await openBrowser();
-        await goto(config.get('Site.url'));
-        await write(config.get('User.username'), into(inputField({'type':'email'})));
-        await write(config.get('User.password'), into(inputField({'type':'password'})));
+        await goto(config.get('Fitbit.url'));
+        await write(config.get('Fitbit.username'), into(inputField({'type':'email'})));
+        await write(config.get('Fitbit.password'), into(inputField({'type':'password'})));
         await click(button('Login'));
         await waitFor(intervalSecs(5));
         await click($('button.walking'));
